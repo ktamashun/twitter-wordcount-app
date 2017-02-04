@@ -4,6 +4,7 @@ services:
     build: .
     depends_on:
      - rabbitmq
+     - mysql
     ports:
      - "8080:8080"
     volumes:
@@ -13,3 +14,10 @@ services:
     ports:
      - "15672:15672"
      - "5672:5672"
+  mysql:
+    image: "mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: twc
+      MYSQL_USER: twc
+      MYSQL_PASSWORD: 123456

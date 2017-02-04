@@ -7,6 +7,11 @@
  */
 
 
+$connection = new PDO("mysql:dbname=".MYSQL_DATABASE.";host=".MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD);
+global $connection;
+
+$connection->query('SHOW DATABASES;');
+
 /**
  * @param \PhpAmqpLib\Message\AMQPMessage $message
  */
