@@ -21,7 +21,19 @@ $channel->exchange_declare($exchange, 'direct', false, false, false);
 $channel->queue_bind($queue, $exchange);
 
 
+// set the error handling
+ini_set('display_errors', 1);
+error_reporting(-1);
+
+// init application
 $app = new Silex\Application();
+
+// set debug mode
+$app['debug'] = true;
+
+
+
+
 
 $app->get('/read-stream', function() use($app, $channel, $exchange) {
 	require 'read-stream.php';
