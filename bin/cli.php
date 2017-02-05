@@ -6,8 +6,6 @@
  * Time: 1:18
  */
 
-sleep(30);
-
 require_once __DIR__.'/../vendor/autoload.php';
 require_once 'config.php';
 

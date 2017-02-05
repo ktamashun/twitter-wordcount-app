@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sleep 1
+sleep 30
 
 # nohup php ./bin/cli.php /read-stream &
 
