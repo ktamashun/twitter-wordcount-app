@@ -6,10 +6,10 @@
  * Time: 1:18
  */
 
-sleep(20);
+sleep(30);
 
 require_once __DIR__.'/../vendor/autoload.php';
-require_once 'env.local.php';
+require_once 'config.php';
 
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 

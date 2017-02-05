@@ -1,4 +1,4 @@
 /vendor/
 .idea
 /tmp/*
-/bin/env.local.php
+/.env.local

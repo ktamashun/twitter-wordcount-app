@@ -1,23 +1,37 @@
 version: '2'
 services:
-  app:
-    build: .
+  read_stream:
+    build:
+      context: .
+      dockerfile: Dockerfile-read-stream
+    depends_on:
+     - rabbitmq
+    volumes:
+     - .:/www
+    tty: true
+    env_file: .env.local
+
+  read_message_queue:
+    build:
+      context: .
+      dockerfile: Dockerfile-read-message-queue
     depends_on:
      - rabbitmq
      - mysql
-    ports:
-     - "8080:8080"
     volumes:
      - .:/www
+    tty: true
+    env_file: .env.local
+
   rabbitmq:
     image: "rabbitmq:3-management-alpine"
     ports:
      - "15672:15672"
      - "5672:5672"
+    env_file: .env.local
+
   mysql:
     image: "mysql"
-    environment:
-      MYSQL_ROOT_PASSWORD: 123456
-      MYSQL_DATABASE: twc
-      MYSQL_USER: twc
-      MYSQL_PASSWORD: 123456
+    ports:
+     - "3306:3306"
+    env_file: .env.local

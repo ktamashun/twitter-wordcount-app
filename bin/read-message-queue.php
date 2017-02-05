@@ -6,25 +6,40 @@
  * Time: 16:48
  */
 
-
-$connection = new PDO("mysql:dbname=".MYSQL_DATABASE.";host=".MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD);
-global $connection;
-
-$connection->query('SHOW DATABASES;');
+global $db33;
+$db33 = new PDO("mysql:dbname=".MYSQL_DATABASE.";host=".MYSQL_HOST, 'root', MYSQL_PASSWORD);
 
 /**
  * @param \PhpAmqpLib\Message\AMQPMessage $message
  */
 function process_message($message)
 {
-	echo "\n--------\n";
-	echo $message->body;
-	echo "\n--------\n";
-	$message->delivery_info['channel']->basic_ack($message->delivery_info['delivery_tag']);
-	// Send a message with the string "quit" to cancel the consumer.
-	if ($message->body === 'quit') {
-		$message->delivery_info['channel']->basic_cancel($message->delivery_info['consumer_tag']);
+	global $db33;
+	$status = json_decode($message->body);
+
+	$words = array_filter(explode(' ', $status->text), function($value) {
+		if (empty($value)) {
+			return false;
+		}
+		if (in_array($value, ['RT'])) {
+			return false;
+		}
+		if ('@' == $value{0}) {
+			return false;
+		}
+		if ('http' == substr($value, 0, 4)) {
+			return false;
+		}
+
+		return true;
+	});
+
+	//var_dump(count($words));
+	foreach ($words as $word) {
+		$db33->exec('INSERT INTO word_count (word, word_count) VALUES ("'.$word.'", 1); ');
 	}
+
+	$message->delivery_info['channel']->basic_ack($message->delivery_info['delivery_tag']);
 }
 
 $consumerTag = 'consumer';

@@ -1,0 +1,11 @@
+FROM php:7.1-cli
+ADD . /www
+WORKDIR /www
+
+RUN apt-get update
+
+RUN docker-php-ext-install bcmath
+
+RUN chmod +x /www/bin/read-stream.sh
+
+CMD ./bin/read-stream.sh
