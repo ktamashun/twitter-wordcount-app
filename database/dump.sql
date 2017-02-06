@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS word_count;
+--DROP TABLE IF EXISTS word_count;
 
-CREATE TABLE word_count (
+CREATE TABLE IF NOT EXISTS word_count (
  id INT NOT NULL AUTO_INCREMENT,
  word VARCHAR(100) NOT NULL,
  word_count INT(10) NOT NULL,

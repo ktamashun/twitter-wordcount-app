@@ -15,8 +15,8 @@ $stream = new \Callisto\Stream\Filter($oauth);
 $stream->setLogger($logger);
 $stream->setRequestParameters(
 	[
-		new Callisto\RequestParameter\Track(['twitter']),
-		new Callisto\RequestParameter\Language(['en']),
+		new Callisto\RequestParameter\Track(['twitter', 'trump', 'kim', 'facebook', 'taylor', 'google', 'RT']),
+		//new Callisto\RequestParameter\Language(['en']),
 	]
 );
 
