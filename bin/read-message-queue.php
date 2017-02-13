@@ -6,6 +6,7 @@
  * Time: 16:48
  */
 
+global $dbPdo;
 $dbPdo = new PDO("mysql:dbname=".MYSQL_DATABASE.";host=".MYSQL_HOST, 'root', MYSQL_PASSWORD);
 
 /**
