@@ -58,6 +58,7 @@ function process_message($message)
 }
 
 $consumerTag = 'consumer';
+$queue = '';
 $channel->basic_consume($queue, $consumerTag, false, false, false, false, 'process_message');
 
 // Loop as long as the channel has callbacks registered
